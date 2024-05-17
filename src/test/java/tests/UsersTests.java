@@ -17,9 +17,6 @@ import static java.lang.Math.log;
 
 public class UsersTests {
 
-
-
-
     @Test
     public void getUsersTest() {
         Map<String, Integer> map = new HashMap<>();
@@ -73,9 +70,10 @@ public class UsersTests {
             String userId = "60d0fe4f5311236168a109ca";
             Response response = given()
                     .header("app-id", "664537d0b23dada292df3e28")
+                    .pathParam("userId", userId)
                     .log().all()
                     .when()
-                    .get("/user/" + userId);
+                    .get("/user/{userId}");
             response.prettyPrint();
             Assert.assertEquals(response.getStatusCode(), 200, "Expected 200 but got: " + response.getStatusCode());
             String actualFirstName = response.jsonPath().getString("firstName");
